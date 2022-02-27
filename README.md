@@ -1,5 +1,5 @@
-# Splinterbuyer
-Splinterbuyer - Splinterlands Autobid Market Bot
+# Splinterbuyer - Splinterlands Autobid Market Bot
+
 A market bot written in Python that listens to HIVE blockchain transactions to automatically buy underpriced cards as soon as they get listed.
 
 ## How it works
