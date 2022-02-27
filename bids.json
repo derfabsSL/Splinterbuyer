@@ -1,0 +1,23 @@
+{
+    "account": {
+        "name": "your splinterlands username (without the @, e.g. derfabs)",
+        "active_key": "your active key here"
+    },
+    "bids": [{
+        "cards": [131],
+        "editions": [],
+        "rarities": [],
+        "max_price": 30,
+        "max_quantity": 5,
+        "gold_only": true,
+        "exclude_cl": false
+    }, {
+        "cards": [],
+        "editions": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "rarities": ["2", "3"],
+        "max_price": 7,
+        "max_quantity": 1,
+        "gold_only": true,
+        "exclude_cl": true
+    }]
+}
