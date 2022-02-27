@@ -13,7 +13,7 @@ The bot streams the HIVE blockchain and listens for new sell orders. You can set
 - Can run 24/7
 
 ### Fees
-The bot is completely free to use, I make money by collecting 5% fee on every transaction.
+The bot is completely free to use, however I do collect a 5% fee on every transaction.
 
 ## Installation
 
