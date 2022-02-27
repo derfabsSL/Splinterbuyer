@@ -13,7 +13,7 @@ The bot streams the HIVE blockchain and listens for new sell orders. You can set
 - Can run 24/7
 
 ### Fees
-The bot is completely free to use, however I do collect a 5% fee on every transaction.
+The bot is completely free to use, however I do collect a 1% fee on every transaction.
 
 ## Installation
 
@@ -119,7 +119,7 @@ python3 Splinterbuyer.pyc
 
 ## Are my Keys Safe?
 
-I make money by collecting 5% fee on every card the bot buys.
+I make money by collecting 1% fee on every card the bot buys.
 Your keys are only used to sign blockchain transactions for buying cards and will never leave your computer.
 I am not stealing any keys, as it is in my personal best interest to keep as many active users of this bot as possible to collect the maximum amount of fees.
 
