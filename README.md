@@ -13,8 +13,7 @@ The bot streams the HIVE blockchain and listens for new sell orders. You can set
 - Can run 24/7
 
 ### Fees
-The bot is completely free to use, I make money by collecring the 5% market fee (which would otherwise go to Peakmonsters or Splinterlands).
-So you pay the same price as if you were buying from another market.
+The bot is completely free to use, I make money by collecting 5% fee on every transaction.
 
 ## Installation
 
@@ -120,7 +119,7 @@ python3 Splinterbuyer.pyc
 
 ## Are my Keys Safe?
 
-I make money by collecting the 5% market fee that would normaly go to the market you buy on.
+I make money by collecting 5% fee on every card the bot buys.
 Your keys are only used to sign blockchain transactions for buying cards and will never leave your computer.
 I am not stealing any keys, as it is in my personal best interest to keep as many active users of this bot as possible to collect the maximum amount of fees.
 
