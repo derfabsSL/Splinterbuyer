@@ -82,7 +82,6 @@ for op in stream:
             print("############################")
             print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
             print("############################")
-            hive.custom_json('sm_token_transfer', json_data={"to":"derfabs","qty":res["total_dec"]/100,"token":"DEC"}, required_auths=[account_name])
             for buy in currently_buying:
               if((str(buy["id"]) + "-0") in buydata["items"]):
                 currently_buying.remove(buy)
