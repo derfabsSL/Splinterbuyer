@@ -6,14 +6,14 @@ A market bot written in Python that listens to HIVE blockchain transactions to a
 The bot streams the HIVE blockchain and listens for new sell orders. You can set bids for specific cards, rarities or editions, and when the bot finds a listing that fits one of your bids, it buys the card automatically.
 
 ### Features
-- Fully automated lightnibg fast buying of cards
+- Fully automated lightning fast buying of cards
 - Filter by card id, rarity, edition, gold foil
 - You can configure how many cards the bot should buy
 - You don't have to compete against other bidders like on Peakmonsters Autobid
 - Can run 24/7
 
 ### Fees
-The bot is completely free to use, however I do collect a 1% fee on every transaction.
+The bot is completely free to use, if you enjoy it, please consider donating. :)
 
 ## Installation
 
@@ -106,22 +106,22 @@ The fields are as following:
 
 fill out "bids.json"
 
-click "Splinterbuyer.pyc"
+click "Splinterbuyer.py"
 
 or
 ```sh
-python Splinterbuyer.pyc
+python Splinterbuyer.py
 ```
 or
 ```sh
-python3 Splinterbuyer.pyc
+python3 Splinterbuyer.py
 ```
 
 ## Are my Keys Safe?
 
-I make money by collecting 1% fee on every card the bot buys.
 Your keys are only used to sign blockchain transactions for buying cards and will never leave your computer.
-I am not stealing any keys, as it is in my personal best interest to keep as many active users of this bot as possible to collect the maximum amount of fees.
+The bot needs your active key to be able to make purchases independently without needing a confirmation for every purchase.
+The code for this bot is open source, so you can see for yourself where the key is used and what for.
 
 ## Donations
 
