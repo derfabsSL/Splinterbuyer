@@ -54,49 +54,66 @@ The fields are as following:
 
 1. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put [131].
           If you want to buy only a single card, leave the other fields empty!
+
           Example, only buy chicken:
       ```
         "cards": [131]
       ```
 4. `editions`: This specifies the editions the bot will filter for, formatted by the edition IDs as they appear in the Splinterlands API. The keys are as following: 
-      '0' - * alpha
-      '1' - * beta
-      '2' - * promo
-      '3' - * reward
-      '4' - * untamed
-      '5' - * dice
-      '7' - * chaos_legion
+
+      `0` - alpha
+
+      `1` - beta
+
+      `2` - promo
+
+      `3` - reward
+
+      `4` - untamed
+
+      `5` - dice
+
+      `7` - chaos_legion
+
       Note that 5 is missing, as it is for Gladiator cards, which are not tradable.
       Example, only buy alpha, beta, promo and untamed cards:
       ```
         "editions": ["0","1","2","4"]
       ```
 3. `rarities`: : This specifies the rarities the bot will filter for, formatted by the IDs as they appear in the Splinterlands API. The keys are as following: 
-      '0' - * common
-      '1' - * rare
-      '2' - * epic
-      '3' - * legendary
-      Example, only buy epic and legendary cards:
+      `0` - common
+
+      `1` - rare
+
+      `2` - epic
+
+      `3` - legendary
+ 
+     Example, only buy epic and legendary cards:
       ```
         "rarities": ["3","4"]
       ```
 4. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
+
        Example, buy everything under 69.420 USD:
       ```
         "max_price": [69.42]
       ```
 6. `max_quantity`: How many cards the bot should buy for this specific bid
+
  Example, buy 5 cards:
       ```
         "max_quantity": 5
       ```
 8. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
+
   Example, buy only gold foil cards:
       ```
         "gold_only": true
       ```
 10. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
- Example, don't buy CL (reward) cards:
+ 
+Example, don't buy CL (reward) cards:
       ```
         "exclude_cl": true
       ```
