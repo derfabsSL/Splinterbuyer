@@ -46,7 +46,6 @@ for bid in bids:
     bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"] and int(card["id"]) < 330]
   else:
     bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"]]
-  bid["cards"] = []
   for ed in bid["editions"]:
     current_ed = [str(card["id"]) for card in bid["cards_tmp"] if str(ed) in card["editions"]]
     bid["cards"] =  bid["cards"] + current_ed
