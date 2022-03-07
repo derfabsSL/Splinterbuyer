@@ -82,7 +82,7 @@ for op in stream:
               price = float(listing["price"])
               cardid = str(listing["cards"])[5:-13]
               id = op["trx_id"]
-              jsondata_old = '{"items":["'+ str(id) + '-' + index + '"], "price":' + str(price) +', "currency":"' + str(currency) + '"}'
+              jsondata_old = '{"items":["'+ str(id) + '-' + str(index) + '"], "price":' + str(price) +', "currency":"' + str(currency) + '"}'
               hive.custom_json('sm_market_purchase', json_data=jsondata_old, required_auths=[account_name])
       except Exception as e:
           logger.error("error occured while checking cards: "  + repr(e))
