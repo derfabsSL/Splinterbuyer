@@ -49,6 +49,9 @@ The fields are as following:
 ```
 "active_key": "iednwodpdw2112einoenpdisdnpsa",
 ```
+3. `currency`: Either "DEC" or "CREDITS", depending on how you want to buy
+"currency": "DEC"
+```
    
 #### bids
 
