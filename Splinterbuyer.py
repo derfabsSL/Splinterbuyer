@@ -100,11 +100,11 @@ for op in stream:
             logger.info(res)
 
             for buy in currently_buying:
-              if((str(buy["id"]) + "-0") in buydata["items"]):
+              if((str(buy["id"])) in buydata["items"]):
                 currently_buying.remove(buy)
           else:
             for buy in currently_buying:
-              if((str(buy["id"]) + "-0") in buydata["items"]):
+              if((str(buy["id"])) in buydata["items"]):
                 bids[buy["bid_idx"]]["max_quantity"] = bids[buy["bid_idx"]]["max_quantity"] + 1
                 print("buy failed, card already sold")
                 currently_buying.remove(buy)
