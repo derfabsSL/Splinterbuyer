@@ -1,7 +1,8 @@
 {
     "account": {
         "name": "your splinterlands username (without the @, e.g. derfabs)",
-        "active_key": "your active key here"
+        "active_key": "your active key here",
+        "currency": "DEC"
     },
     "bids": [{
         "cards": [131],
