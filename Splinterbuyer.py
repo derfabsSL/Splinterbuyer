@@ -78,7 +78,7 @@ for op in stream:
         else:
           listings.append(json.loads(op["json"]))
         for index, listing in enumerate(listings):
-          if (check_desired(listing, op["trx_id"]) == True):
+          if (check_desired(listing, op["trx_id"] + "-" + str(index)) == True):
               price = float(listing["price"])
               cardid = str(listing["cards"])[5:-13]
               id = op["trx_id"]
