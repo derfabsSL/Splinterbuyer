@@ -1,4 +1,5 @@
-from logging.handlers import RotatingFileHandler
+from datetime import datetime
+from logging.handlers import TimedRotatingFileHandler
 import os
 from beem.blockchain import Blockchain
 from beem import Hive
@@ -10,11 +11,10 @@ THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 Log_Format = "%(levelname)s %(asctime)s - %(message)s"
 logging.basicConfig(format = Log_Format)
 logger = logging.getLogger()
-handler = RotatingFileHandler(os.path.join(THIS_FOLDER, 'transactions.log'), maxBytes=2000, backupCount=10)
+filename = (f'transactions-{datetime.now():%Y-%m-%d %H-%M-%S}.log')
+handler = TimedRotatingFileHandler(os.path.join(THIS_FOLDER, filename),  when='midnight')
 logger.addHandler(handler)
-logger.info("starting...")
-
-# Opening JSON file
+logger.error("starting...")
 
 my_file = os.path.join(THIS_FOLDER, 'bids.json')
 f = open(my_file)
@@ -97,7 +97,7 @@ for op in stream:
             print("############################")
             print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
             print("############################")
-            logger.info(res)
+            logger.error(str(res))
 
             for buy in currently_buying:
               if((str(buy["id"])) in buydata["items"]):
