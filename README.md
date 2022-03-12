@@ -56,12 +56,12 @@ The fields are as following:
    
 #### bids
 
-1. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put [131].
+1. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put ["131"].
           If you want to buy only a single card, leave the other fields empty!
 
           Example, only buy chicken:
       ```
-        "cards": [131]
+        "cards": ["131"]
       ```
 4. `editions`: This specifies the editions the bot will filter for, formatted by the edition IDs as they appear in the Splinterlands API. The keys are as following: 
 
