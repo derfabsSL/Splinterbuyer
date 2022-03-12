@@ -8,7 +8,7 @@ import requests
 import logging 
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-Log_Format = "%(levelname)s %(asctime)s - %(message)s"
+Log_Format = "%(asctime)s - %(message)s"
 logging.basicConfig(format = Log_Format)
 logger = logging.getLogger()
 filename = (f'transactions-{datetime.now():%Y-%m-%d %H-%M-%S}.log')
@@ -59,7 +59,6 @@ for bid in bids:
     bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"] and int(card["id"]) < 330]
   else:
     bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"]]
-  bid["cards"] = []
   for ed in bid["editions"]:
     current_ed = [str(card["id"]) for card in bid["cards_tmp"] if str(ed) in card["editions"]]
     bid["cards"] =  bid["cards"] + current_ed
