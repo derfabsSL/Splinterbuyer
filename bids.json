@@ -5,7 +5,7 @@
         "currency": "DEC"
     },
     "bids": [{
-        "cards": [131],
+        "cards": ["131"],
         "editions": [],
         "rarities": [],
         "max_price": 30,
