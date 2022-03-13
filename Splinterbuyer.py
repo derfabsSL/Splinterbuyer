@@ -109,3 +109,4 @@ for op in stream:
                 currently_buying.remove(buy)
         except Exception as e:
           logger.error("error occured while buying: "  + repr(e))
+          logger.error(data)
