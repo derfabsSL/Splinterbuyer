@@ -63,7 +63,7 @@ for bid in bids:
     current_ed = [str(card["id"]) for card in bid["cards_tmp"] if str(ed) in card["editions"]]
     bid["cards"] =  bid["cards"] + current_ed
 
-blockchain = Blockchain(blockchain_instance=hive)
+blockchain = Blockchain(blockchain_instance=hive, mode="head")
 stream = blockchain.stream()
 
 for op in stream:
