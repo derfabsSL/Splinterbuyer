@@ -6,6 +6,8 @@ from beem import Hive
 import json
 import requests
 import logging 
+import time
+from threading import Thread
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 Log_Format = "%(asctime)s - %(message)s"
@@ -54,6 +56,33 @@ def check_desired(listing, trx_id):
           return True
   return False
 
+def check_buying_result():
+  n = 3
+  while n > 0:
+      response = requests.request("GET", url_purchase + op["trx_id"], headers=headers)
+      data = json.loads(response.text)
+      if "trx_info" in data:
+        n = 0
+        buydata = json.loads(data["trx_info"]["data"])
+        if(data["trx_info"]["success"] == True):
+          res = json.loads(data["trx_info"]["result"])
+          print("############################")
+          print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
+          print("############################")
+          logger.error(str(res))
+          for buy in currently_buying:
+            if((str(buy["id"])) in buydata["items"]):
+              currently_buying.remove(buy)
+        else:
+          for buy in currently_buying:
+            if((str(buy["id"])) in buydata["items"]):
+              bids[buy["bid_idx"]]["max_quantity"] = bids[buy["bid_idx"]]["max_quantity"] + 1
+              print("buy failed, card already sold")
+              currently_buying.remove(buy)
+      else:
+        n -= 1
+        time.sleep(1)
+
 for bid in bids:
   if(bid["exclude_cl"]):
     bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"] and int(card["id"]) < 330]
@@ -88,25 +117,8 @@ for op in stream:
     else:
       if(len(currently_buying) > 0 and account_name in op["required_auths"]):
         try:
-          response = requests.request("GET", url_purchase + op["trx_id"], headers=headers)
-          data = json.loads(response.text)
-          buydata = json.loads(data["trx_info"]["data"])
-          if(data["trx_info"]["success"] == True):
-            res = json.loads(data["trx_info"]["result"])
-            print("############################")
-            print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
-            print("############################")
-            logger.error(str(res))
-
-            for buy in currently_buying:
-              if((str(buy["id"])) in buydata["items"]):
-                currently_buying.remove(buy)
-          else:
-            for buy in currently_buying:
-              if((str(buy["id"])) in buydata["items"]):
-                bids[buy["bid_idx"]]["max_quantity"] = bids[buy["bid_idx"]]["max_quantity"] + 1
-                print("buy failed, card already sold")
-                currently_buying.remove(buy)
+          t = Thread(target = check_buying_result)
+          t.start() 
         except Exception as e:
           logger.error("error occured while buying: "  + repr(e))
-          logger.error(data)
+          logger.error(op)
