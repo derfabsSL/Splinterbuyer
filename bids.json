@@ -11,7 +11,8 @@
         "max_price": 30,
         "max_quantity": 5,
         "gold_only": true,
-        "exclude_cl": false
+        "exclude_cl": false,
+        "sell_for_pct_more": 10
     }, {
         "cards": [],
         "editions": ["0", "1", "2", "3", "4", "5", "6", "7"],
@@ -19,6 +20,7 @@
         "max_price": 7,
         "max_quantity": 1,
         "gold_only": true,
-        "exclude_cl": true
+        "exclude_cl": true,
+        "sell_for_pct_more": 0
     }]
 }
