@@ -6,14 +6,14 @@ A market bot written in Python that listens to HIVE blockchain transactions to a
 The bot streams the HIVE blockchain and listens for new sell orders. You can set bids for specific cards, rarities or editions, and when the bot finds a listing that fits one of your bids, it buys the card automatically.
 
 ### Features
-- Fully automated lightning fast buying of cards
+- Fully automated lightning fast buying (and selling) of cards
 - Filter by card id, rarity, edition, gold foil
 - You can configure how many cards the bot should buy
 - You don't have to compete against other bidders like on Peakmonsters Autobid
 - Can run 24/7
 
 ### Fees
-The bot is completely free to use, if you enjoy it, please consider donating. :)
+The bot is completely free to use, if you enjoy it please consider donating. :)
 
 ## Installation
 
@@ -63,7 +63,7 @@ The fields are as following:
       ```
         "cards": ["131"]
       ```
-4. `editions`: This specifies the editions the bot will filter for, formatted by the edition IDs as they appear in the Splinterlands API. The keys are as following: 
+2. `editions`: This specifies the editions the bot will filter for, formatted by the edition IDs as they appear in the Splinterlands API. The keys are as following: 
 
       `0` - alpha
 
@@ -103,23 +103,36 @@ The fields are as following:
       ```
         "max_price": [69.42]
       ```
-6. `max_quantity`: How many cards the bot should buy for this specific bid
+5. `max_quantity`: How many cards the bot should buy for this specific bid
 
  Example, buy 5 cards:
       ```
         "max_quantity": 5
       ```
-8. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
+6. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
 
   Example, buy only gold foil cards:
       ```
         "gold_only": true
       ```
-10. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
+7. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
  
 Example, don't buy CL (reward) cards:
       ```
         "exclude_cl": true
+      ```
+
+8. `buy_for_pct_more`: If you want the bot to put the cards on the market immediately after buying, you can use this parameter. The bot will sell the card for x percent more than the buy price. For example, if the card is bought for 10$ and "buy_for_pct_more" is set to 10, the bot will list the card for 11$
+**If you don't want the bot to sell automatically, leave this parameter at 0**
+
+Example, sell for 10% higher than buy price:
+      ```
+        "buy_for_pct_more": 10
+      ```
+
+Example 2, don't sell cards:
+      ```
+        "buy_for_pct_more": 0
       ```
 
 
