@@ -52,7 +52,7 @@ def check_desired(listing, trx_id):
     and ((not bid["gold_only"]) or (str(listing["cards"])[2] == "G"))):
           bid["max_quantity"] = bid["max_quantity"] - 1
           print("buying, remaining quantity: " + str(bid["max_quantity"]))
-          currently_buying.append({"id": trx_id, "bid_idx": bids.index(bid)})
+          currently_buying.append({"id": trx_id, "bid_idx": bids.index(bid), "cardid": str(listing["cards"])[2:-2]})
           return True
   return False
 
@@ -69,9 +69,16 @@ def check_buying_result():
           print("############################")
           print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
           print("############################")
-          logger.error(str(res))
+          logger.error("bought card " + str(buy["cardid"]) +  " for: " + str(res["total_usd"]) + "$")
           for buy in currently_buying:
             if((str(buy["id"])) in buydata["items"]):
+              if bids[buy["bid_idx"]]["sell_for_pct_more"] > 0:
+                new_price = float(res["total_usd"])  + (float(res["total_usd"]) / float(bids[buy["bid_idx"]]["sell_for_pct_more"]))
+                jsondata = '{"cards":["' + str(buy["cardid"]) + '"],"currency":"USD","price":' + str(new_price) +',"fee_pct":500}'
+                print("selling " + str(buy["cardid"]) + " for " + str(new_price))
+                hive.custom_json('sm_sell_cards', json_data=jsondata, required_auths=[account_name])
+                logger.error(print("sold " + str(buy["cardid"]) + " for " + str(new_price)))
+                bids[buy["bid_idx"]]["sell_for_pct_more"]
               currently_buying.remove(buy)
         else:
           for buy in currently_buying:
@@ -97,7 +104,7 @@ stream = blockchain.stream()
 
 for op in stream:
   if(op["type"] == 'custom_json'):
-    if op["id"] == 'sm_sell_cards':
+    if op["id"] == 'sm_sell_cards' and account_name not in op["required_auths"]:
       try:
         listings = []
         if(op["json"][:1] == '[' ):
@@ -121,4 +128,3 @@ for op in stream:
           t.start() 
         except Exception as e:
           logger.error("error occured while buying: "  + repr(e))
-          logger.error(op)
