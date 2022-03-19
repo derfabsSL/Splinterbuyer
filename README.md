@@ -17,13 +17,14 @@ The bot is completely free to use, if you enjoy it please consider donating. :)
 
 ## Installation
 
-1. Download and install [Git](https://git-scm.com/) and [Python](https://www.python.org/)
-2. Clone the repo: 
+1. Download and install [Python](https://www.python.org/)
+2. Download the latest release from the [release page.](https://github.com/derfabsSL/Splinterbuyer/releases)
+ 
+    Alternatively, download [Git](https://git-scm.com/) and clone the repo: 
 
       ```sh
       git clone https://github.com/derfabsSL/Splinterbuyer.git
       ```
-
 3. Go to repo directory
       ```sh
       cd Splinterbuyer
