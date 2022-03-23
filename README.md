@@ -131,7 +131,8 @@ The fields are as following:
     ```
     "elements": ["dragon"]
     ```
-5. `types`: To filter for Summoners or Monsters. Values are:
+    
+6. `types`: To filter for Summoners or Monsters. Values are:
    
    `summoner`
 
@@ -143,49 +144,50 @@ The fields are as following:
     "types": ["summoner", "monster"]
     ```
 
-6. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
+7. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
 
      Example, buy everything under 69.420 USD:
      
       ```
       "max_price": [69.42]
       ```
-7. `max_quantity`: How many cards the bot should buy for this specific bid
+8. `max_quantity`: How many cards the bot should buy for this specific bid
 
-  Example, buy 5 cards:
-  
-      ```
-      "max_quantity": 5
-      ```
-6. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
+    Example, buy 5 cards:
 
-  Example, buy only gold foil cards:
+        ```
+        "max_quantity": 5
+        ```
+9. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
+
+    Example, buy only gold foil cards:
   
       ```
       "gold_only": true
       ```
-7. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
+10. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
  
-Example, don't buy CL (reward) cards:
+     Example, don't buy CL (reward) cards:
 
-      ```
-      "exclude_cl": true
-      ```
+          ```
+          "exclude_cl": true
+          ```
 
-8. `buy_for_pct_more`: If you want the bot to put the cards on the market immediately after buying, you can use this parameter. The bot will sell the card for x percent more than the buy price. For example, if the card is bought for 10$ and "buy_for_pct_more" is set to 10, the bot will list the card for 11$
-**If you don't want the bot to sell automatically, leave this parameter at 0**
+11. `buy_for_pct_more`: If you want the bot to put the cards on the market immediately after buying, you can use this parameter. The bot will sell the card for x   percent more than the buy price. For example, if the card is bought for 10$ and "buy_for_pct_more" is set to 10, the bot will list the card for 11$
 
-Example, sell for 10% higher than buy price:
+     **If you don't want the bot to sell automatically, leave this parameter at 0**
 
-      ```
-      "buy_for_pct_more": 10
-      ```
+     Example, sell for 10% higher than buy price:
 
-Example 2, don't sell cards:
+           ```
+           "buy_for_pct_more": 10
+           ```
 
-      ```
-      "buy_for_pct_more": 0
-      ```
+     Example 2, don't sell cards:
+
+           ```
+           "buy_for_pct_more": 0
+           ```
 
 
 ### Running the bot
