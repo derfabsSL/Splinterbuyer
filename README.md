@@ -57,84 +57,134 @@ The fields are as following:
    
 #### bids
 
-1. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put ["131"].
-          If you want to buy only a single card, leave the other fields empty!
+1. `comment`: This field is there to name your bids. You can write whatever you want here, the bot will ignore it.
+              
+    Example:
 
-          Example, only buy chicken:
+    ```
+    "comment": "I love Splinterbuyer Market bot!"
+    ```
+
+2. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put [131].
+
+     If you fill in this field, all other ones will be ignored, you can leave them empty.
+
+     Example, only buy chicken:
       ```
-        "cards": ["131"]
+      "cards": [131]
       ```
-2. `editions`: This specifies the editions the bot will filter for, formatted by the edition IDs as they appear in the Splinterlands API. The keys are as following: 
+3. `editions`: This specifies the editions the bot will filter for. The keys are as following: 
 
-      `0` - alpha
+   `alpha`
 
-      `1` - beta
+   `beta` 
 
-      `2` - promo
+   `promo`
 
-      `3` - reward
+   `reward` 
 
-      `4` - untamed
+   `untamed`
 
-      `5` - dice
+   `dice`
 
-      `7` - chaos_legion
+   `chaos`
 
-      Note that 5 is missing, as it is for Gladiator cards, which are not tradable.
       Example, only buy alpha, beta, promo and untamed cards:
       ```
-        "editions": ["0","1","2","4"]
+      "editions": ["alpha","beta","promo","untamed"]
       ```
-3. `rarities`: : This specifies the rarities the bot will filter for, formatted by the IDs as they appear in the Splinterlands API. The keys are as following: 
-      
-      `1` - common
+4. `rarities`: This specifies the rarities the bot will filter for, formatted by the IDs as they appear in the Splinterlands API. The keys are as following: 
 
-      `2` - rare
+    `common`
 
-      `3` - epic
+    `rare`
 
-      `4` - legendary
+    `epic`
+
+    `legendary` 
  
      Example, only buy epic and legendary cards:
+     
       ```
-        "rarities": ["3","4"]
+      "rarities": ["epic","legendary"]
       ```
-4. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
+5. `elements`: The bot can also filter for specific elements, like "fire", "death" or "dragon" 
+   
+   The keys are: 
 
-       Example, buy everything under 69.420 USD:
-      ```
-        "max_price": [69.42]
-      ```
-5. `max_quantity`: How many cards the bot should buy for this specific bid
+   `fire`
 
- Example, buy 5 cards:
+   `water`
+
+   `earth`
+
+   `life`
+
+   `death`
+
+   `dragon`
+
+   `neutral`
+
+    Example, filter for dragon cards only:
+
+    ```
+    "elements": ["dragon"]
+    ```
+5. `types`: To filter for Summoners or Monsters. Values are:
+   
+   `summoner`
+
+   `monster`
+
+    Example, buy summoners and monsters:
+
+    ```
+    "types": ["summoner", "monster"]
+    ```
+
+6. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
+
+     Example, buy everything under 69.420 USD:
+     
       ```
-        "max_quantity": 5
+      "max_price": [69.42]
+      ```
+7. `max_quantity`: How many cards the bot should buy for this specific bid
+
+  Example, buy 5 cards:
+  
+      ```
+      "max_quantity": 5
       ```
 6. `gold_only`: If this is set to true, the bot will only  buy gold foil cards.
 
   Example, buy only gold foil cards:
+  
       ```
-        "gold_only": true
+      "gold_only": true
       ```
 7. `exclude_cl`: This parameter is meant to be paired with filtering for Reward Edition cards, because these cards cannot be filtered by edition, but Chaos Legion cards are worth significantly less atm. If this is set to true, the bot will NOT buy any cards released with ID > 330.
  
 Example, don't buy CL (reward) cards:
+
       ```
-        "exclude_cl": true
+      "exclude_cl": true
       ```
 
 8. `buy_for_pct_more`: If you want the bot to put the cards on the market immediately after buying, you can use this parameter. The bot will sell the card for x percent more than the buy price. For example, if the card is bought for 10$ and "buy_for_pct_more" is set to 10, the bot will list the card for 11$
 **If you don't want the bot to sell automatically, leave this parameter at 0**
 
 Example, sell for 10% higher than buy price:
+
       ```
-        "buy_for_pct_more": 10
+      "buy_for_pct_more": 10
       ```
 
 Example 2, don't sell cards:
+
       ```
-        "buy_for_pct_more": 0
+      "buy_for_pct_more": 0
       ```
 
 
