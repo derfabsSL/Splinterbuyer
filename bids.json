@@ -5,22 +5,56 @@
         "currency": "DEC"
     },
     "bids": [{
-        "cards": ["131"],
-        "editions": [],
-        "rarities": [],
-        "max_price": 30,
-        "max_quantity": 5,
-        "gold_only": true,
-        "exclude_cl": false,
-        "sell_for_pct_more": 10
-    }, {
-        "cards": [],
-        "editions": ["0", "1", "2", "3", "4", "5", "6", "7"],
-        "rarities": ["2", "3"],
-        "max_price": 7,
-        "max_quantity": 1,
-        "gold_only": true,
-        "exclude_cl": true,
-        "sell_for_pct_more": 0
-    }]
+            "comment": "golden chicken only, sell for 10% more",
+            "cards": [131],
+            "editions": [],
+            "rarities": [],
+            "elements": [],
+            "type": [],
+            "max_price": 30,
+            "max_quantity": 5,
+            "gold_only": true,
+            "exclude_cl": false,
+            "sell_for_pct_more": 10
+        },
+        {
+            "comment": "chaos legion epic and legendary dragon summoners, dont sell",
+            "cards": [],
+            "editions": ["chaos"],
+            "rarities": ["epic", "legendary"],
+            "elements": ["dragon"],
+            "type": ["summoner"],
+            "max_price": 7,
+            "max_quantity": 1,
+            "gold_only": false,
+            "exclude_cl": false,
+            "sell_for_pct_more": 0
+        },
+        {
+            "comment": "golden common fire reward cards, but no chaos legion rewards",
+            "cards": [],
+            "editions": ["reward"],
+            "rarities": ["common"],
+            "elements": ["fire"],
+            "type": ["summoner", "monster"],
+            "max_price": 7,
+            "max_quantity": 1,
+            "gold_only": true,
+            "exclude_cl": true,
+            "sell_for_pct_more": 0
+        },
+        {
+            "comment": "all cards",
+            "cards": [],
+            "editions": ["alpha", "beta", "promo", "reward", "untamed", "dice", "chaos"],
+            "rarities": ["common", "rare", "epic", "legendary"],
+            "elements": ["fire", "water", "earth", "death", "life", "dragon", "neutral"],
+            "type": ["summoner", "monster"],
+            "max_price": 7,
+            "max_quantity": 1,
+            "gold_only": false,
+            "exclude_cl": false,
+            "sell_for_pct_more": 0
+        }
+    ]
 }
