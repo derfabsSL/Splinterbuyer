@@ -9,12 +9,41 @@ import logging
 import time
 from threading import Thread
 
+colors = {
+  "Red": "fire",
+  "Blue": "water",
+  "Green": "earth",
+  "White": "life",
+  "Black": "death",
+  "Gold": "dragon",
+  "Gray": "neutral"
+}
+
+rarities = {
+  1: "common",
+  2: "rare",
+  3: "epic",
+  4: "legendary"
+}
+
+editions = {
+  "alpha": 0,
+  "beta": 1,
+  "promo": 2,
+  "reward": 3,
+  "untamed": 4,
+  "dice": 5,
+  "chaos": 7
+}
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 Log_Format = "%(asctime)s - %(message)s"
-logging.basicConfig(format = Log_Format)
+
 logger = logging.getLogger()
-filename = (f'transactions-{datetime.now():%Y-%m-%d %H-%M-%S}.log')
+filename = (f'transactions-{datetime.now():%Y-%m-%w}.log')
 handler = TimedRotatingFileHandler(os.path.join(THIS_FOLDER, filename),  when='midnight')
+formatter = logging.Formatter("%(asctime)s - %(message)s", "%Y-%m-%d:%H-%M-%S")
+handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.error("starting...")
 
@@ -56,29 +85,29 @@ def check_desired(listing, trx_id):
           return True
   return False
 
-def check_buying_result():
+def check_buying_result(txa):
   n = 3
   while n > 0:
-      response = requests.request("GET", url_purchase + op["trx_id"], headers=headers)
+      response = requests.request("GET", url_purchase + txa["trx_id"], headers=headers)
       data = json.loads(response.text)
       if "trx_info" in data:
         n = 0
         buydata = json.loads(data["trx_info"]["data"])
         if(data["trx_info"]["success"] == True):
           res = json.loads(data["trx_info"]["result"])
+          print(url_purchase + txa["trx_id"])
           print("############################")
           print("successfully bought card for: " + str(res["total_dec"]) + "DEC")
-          print("############################")
-          logger.error("bought card " + str(buy["cardid"]) +  " for: " + str(res["total_usd"]) + "$")
           for buy in currently_buying:
             if((str(buy["id"])) in buydata["items"]):
+              logger.error("bought card " + str(buy["cardid"]) +  " for: " + str(res["total_usd"]) + "$")
               if bids[buy["bid_idx"]]["sell_for_pct_more"] > 0:
                 new_price = float(res["total_usd"])  + (float(res["total_usd"]) / float(bids[buy["bid_idx"]]["sell_for_pct_more"]))
                 jsondata = '{"cards":["' + str(buy["cardid"]) + '"],"currency":"USD","price":' + str(new_price) +',"fee_pct":500}'
-                print("selling " + str(buy["cardid"]) + " for " + str(new_price))
                 hive.custom_json('sm_sell_cards', json_data=jsondata, required_auths=[account_name])
-                logger.error(print("sold " + str(buy["cardid"]) + " for " + str(new_price)))
+                logger.error("selling " + str(buy["cardid"]) + " for " + str(new_price) + "$")
                 bids[buy["bid_idx"]]["sell_for_pct_more"]
+              print("############################")
               currently_buying.remove(buy)
         else:
           for buy in currently_buying:
@@ -92,12 +121,19 @@ def check_buying_result():
 
 for bid in bids:
   if(bid["exclude_cl"]):
-    bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"] and int(card["id"]) < 330]
+    cards_tmp = [card for card in cardsjson if rarities[int(card["rarity"])] in bid["rarities"] 
+    and colors[str(card["color"])] in bid["elements"] 
+    and str(card["type"]).lower() in str(bid["types"]).lower() and int(card["id"]) < 330]
   else:
-    bid["cards_tmp"] = [card for card in cardsjson if str(card["rarity"]) in bid["rarities"]]
+    cards_tmp = [card for card in cardsjson if rarities[int(card["rarity"])] in bid["rarities"]
+    and colors[str(card["color"])] in bid["elements"]
+    and str(card["type"]).lower() in str(bid["types"]).lower()]
+  all_eds = []
   for ed in bid["editions"]:
-    current_ed = [str(card["id"]) for card in bid["cards_tmp"] if str(ed) in card["editions"]]
-    bid["cards"] =  bid["cards"] + current_ed
+    current_ed = [str(card["id"]) for card in cards_tmp if str(editions[str(ed)]) in card["editions"]]
+    all_eds = all_eds + current_ed
+  if len(bid["cards"]) == 0:
+    bid["cards"] =  all_eds
 
 blockchain = Blockchain(blockchain_instance=hive, mode="head")
 stream = blockchain.stream()
@@ -120,11 +156,11 @@ for op in stream:
               jsondata_old = '{"items":["'+ str(id) + '-' + str(index) + '"], "price":' + str(price) +', "currency":"' + str(currency) + '"}'
               hive.custom_json('sm_market_purchase', json_data=jsondata_old, required_auths=[account_name])
       except Exception as e:
-          logger.error("error occured while checking cards: "  + repr(e))
+          print("error occured while checking cards: "  + repr(e))
     else:
       if(len(currently_buying) > 0 and account_name in op["required_auths"]):
         try:
-          t = Thread(target = check_buying_result)
+          t = Thread(target = check_buying_result(op))
           t.start() 
         except Exception as e:
-          logger.error("error occured while buying: "  + repr(e))
+          print("error occured while buying: "  + repr(e))
