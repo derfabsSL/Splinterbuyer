@@ -86,13 +86,14 @@ The fields are as following:
         "editions": ["0","1","2","4"]
       ```
 3. `rarities`: : This specifies the rarities the bot will filter for, formatted by the IDs as they appear in the Splinterlands API. The keys are as following: 
-      `0` - common
+      
+      `1` - common
 
-      `1` - rare
+      `2` - rare
 
-      `2` - epic
+      `3` - epic
 
-      `3` - legendary
+      `4` - legendary
  
      Example, only buy epic and legendary cards:
       ```
