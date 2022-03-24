@@ -65,7 +65,7 @@ The fields are as following:
     "comment": "I love Splinterbuyer Market bot!"
     ```
 
-2. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put [131].
+2. `cards`: This specifies individual cards you want the bot to buy. For Example to buy Chicken, you would put ["131"].
 
      If you fill in this field, all other ones will be ignored, you can leave them empty.
 
