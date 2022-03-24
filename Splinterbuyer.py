@@ -102,7 +102,7 @@ def check_buying_result(txa):
             if((str(buy["id"])) in buydata["items"]):
               logger.error("bought card " + str(buy["cardid"]) +  " for: " + str(res["total_usd"]) + "$")
               if bids[buy["bid_idx"]]["sell_for_pct_more"] > 0:
-                new_price = float(res["total_usd"])  + (float(res["total_usd"]) / float(bids[buy["bid_idx"]]["sell_for_pct_more"]))
+                new_price = float(res["total_usd"])  + (float(res["total_usd"]) * (float(bids[buy["bid_idx"]]["sell_for_pct_more"]) / 100))
                 jsondata = '{"cards":["' + str(buy["cardid"]) + '"],"currency":"USD","price":' + str(new_price) +',"fee_pct":500}'
                 hive.custom_json('sm_sell_cards', json_data=jsondata, required_auths=[account_name])
                 logger.error("selling " + str(buy["cardid"]) + " for " + str(new_price) + "$")
