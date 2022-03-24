@@ -71,7 +71,7 @@ The fields are as following:
 
      Example, only buy chicken:
       ```
-      "cards": [131]
+      "cards": ["131"]
       ```
 3. `editions`: This specifies the editions the bot will filter for. The keys are as following: 
 
