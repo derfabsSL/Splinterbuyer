@@ -6,7 +6,7 @@
     },
     "bids": [{
             "comment": "golden chicken only, sell for 10% more",
-            "cards": [131],
+            "cards": ["131"],
             "editions": [],
             "rarities": [],
             "elements": [],
