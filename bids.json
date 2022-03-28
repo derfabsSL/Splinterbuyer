@@ -1,8 +1,14 @@
 {
     "account": {
         "name": "your splinterlands username (without the @, e.g. derfabs)",
-        "active_key": "your active key here",
-        "currency": "DEC"
+        "active_key": "your active key here"
+    },
+    "global_params": {
+        "currency": "DEC",
+        "auto_set_buy_price": true,
+        "buy_pct_below_market": 10,
+        "sell_pct_above_buy": 10,
+        "tip_pct_of_profit": 10
     },
     "bids": [{
             "comment": "golden chicken only, sell for 10% more",
@@ -11,7 +17,9 @@
             "rarities": [],
             "elements": [],
             "types": [],
-            "max_price": 30,
+            "min_bcx": 2,
+            "min_cp_per_dec": 0,
+            "max_price": 40,
             "max_quantity": 5,
             "gold_only": true,
             "exclude_cl": false,
@@ -24,6 +32,8 @@
             "rarities": ["epic", "legendary"],
             "elements": ["dragon"],
             "types": ["summoner"],
+            "min_bcx": 0,
+            "min_cp_per_dec": 0,
             "max_price": 7,
             "max_quantity": 1,
             "gold_only": false,
@@ -37,6 +47,8 @@
             "rarities": ["common"],
             "elements": ["fire"],
             "types": ["summoner", "monster"],
+            "min_bcx": 0,
+            "min_cp_per_dec": 0,
             "max_price": 7,
             "max_quantity": 1,
             "gold_only": true,
@@ -44,12 +56,14 @@
             "sell_for_pct_more": 0
         },
         {
-            "comment": "all cards",
+            "comment": "all cards, min 500CP/DEC",
             "cards": [],
             "editions": ["alpha", "beta", "promo", "reward", "untamed", "dice", "chaos"],
             "rarities": ["common", "rare", "epic", "legendary"],
             "elements": ["fire", "water", "earth", "death", "life", "dragon", "neutral"],
             "types": ["summoner", "monster"],
+            "min_bcx": 0,
+            "min_cp_per_dec": 500,
             "max_price": 7,
             "max_quantity": 1,
             "gold_only": false,
