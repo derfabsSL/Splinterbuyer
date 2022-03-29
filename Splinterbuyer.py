@@ -67,7 +67,7 @@ f.close()
 
 hive = Hive(keys=active_key)
 url_purchase = "https://steemmonsters.com/transactions/lookup?trx_id="
-url_player_trx = "https://api.splinterlands.io/market/history?player="
+url_player_trx = "https://api.splinterlands.com/market/history?player="
 url_card_lookup = "https://steemmonsters.com/cards/find?ids="
 url_settings = "https://steemmonsters.com/settings"
 url_prices = "https://api.splinterlands.io/market/for_sale_grouped"
