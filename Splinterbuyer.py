@@ -128,13 +128,10 @@ def calculate_bcx_from_cardID(cardid):
   card = json.loads(str(response.text))[0]
   return calculate_bcx_from_card(card)
 
-def calc_cp_per_dec(cardid, price_usd):
+def calc_cp_per_usd(cardid, price_usd):
   response = requests.request("GET", url_card_lookup + str(cardid), headers=headers)
   card = json.loads(str(response.text))[0]
   bcx = calculate_bcx_from_card(card)
-  dec_setting = json.loads(requests.request("GET", url_settings, headers=headers).text)["dec_price"]
-  card_price_in_dec = price_usd / dec_setting
-  print(str(price_usd) + ": " + str(card_price_in_dec))
   alpha_bcx = 0
   alpha_dec = 0
   alpha_xp = 0
@@ -190,7 +187,7 @@ def calc_cp_per_dec(cardid, price_usd):
    # total_dec *= SM.settings.dec.max_burn_bonus;
   if (card["details"]["tier"] != None and card["details"]["tier"] >= 7):
     total_dec = total_dec / 2;
-  return total_dec / card_price_in_dec
+  return total_dec / price_usd
 
 def check_desired(listing, trx_id):
   price = float(listing["price"])
@@ -208,7 +205,7 @@ def check_desired(listing, trx_id):
     and (price <= float(bid["max_price"])) 
     and ((not bid["gold_only"]) or (str(listing["cards"])[2] == "G"))
     and (bid["min_bcx"] == 0 or calculate_bcx_from_cardID(str(listing["cards"])[2:-2]) >= bid["min_bcx"])
-    and (bid["min_cp_per_dec"] == 0 or calc_cp_per_dec(str(listing["cards"])[2:-2]) >= bid["min_cp_per_dec"])):
+    and (bid["min_cp_per_usd"] == 0 or calc_cp_per_usd(str(listing["cards"])[2:-2]) >= bid["min_cp_per_usd"])):
           bid["max_quantity"] = bid["max_quantity"] - 1
           currently_buying.append({"id": trx_id, "bid_idx": bids.index(bid), "cardid": str(listing["cards"])[2:-2]})
           return True
