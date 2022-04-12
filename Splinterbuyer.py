@@ -202,7 +202,7 @@ def check_desired(listing, trx_id):
   for bid in bids:
     if ((float(bid["max_quantity"]) > 0) 
     and (cardid in bid["cards"]) 
-    and (price <= float(bid["max_price"])) 
+    and (price <= float(bid["prices"][cardid])) 
     and ((not bid["gold_only"]) or (str(listing["cards"])[2] == "G"))
     and (bid["min_bcx"] == 0 or calculate_bcx_from_cardID(str(listing["cards"])[2:-2]) >= bid["min_bcx"])
     and (bid["min_cp_per_usd"] == 0 or calc_cp_per_usd(str(listing["cards"])[2:-2]) >= bid["min_cp_per_usd"])):
@@ -268,16 +268,21 @@ def check_for_sold():
         hive.custom_json('sm_token_transfer', json_data={"to":"derfabs","qty":float(entry["payment"][:-4]) * (tip_pct/100),"token":"DEC"}, required_auths=[account_name])
 
 def check_prices():
-  logger.error("checking prices...")
-  response = requests.request("GET", url_prices, headers=headers)
-  cardsjson = json.loads(str(response.text))
   for bid in bids:
-    for card in cardsjson:
-      if str(card["card_detail_id"]) in bid["cards"] and card["gold"] == bid["gold_only"]:
-        bid["max_price"] = min(bid["max_price"], (card["low_price"] * (1 - (buypct / 100))))
-    logger.error(bid["comment"] + ": " + str(bid["max_price"]))
-    print(bid["comment"] + ": " + str(bid["max_price"]))
-  return
+    bid["prices"] = {}
+  if auto_set_buy_price:  
+    logger.error("checking prices...")
+    response = requests.request("GET", url_prices, headers=headers)
+    cardsjson = json.loads(str(response.text))
+    for bid in bids:
+      for card in cardsjson:
+        if str(card["card_detail_id"]) in bid["cards"] and card["gold"] == bid["gold_only"]:
+          bid["prices"][str(card["card_detail_id"])] = (card["low_price"] * (1 - (buypct / 100)))
+    return
+  else:
+    for cardid in bid["cards"]:
+      bid["prices"][cardid] = bid["max_price"]
+    return
   
 for bid in bids:
   if(bid["exclude_cl"]):
@@ -295,8 +300,8 @@ for bid in bids:
   if len(bid["cards"]) == 0:
     bid["cards"] =  all_eds
 
-if auto_set_buy_price:
-  check_prices()
+
+check_prices()
 last_checked = time.time()
 blockchain = Blockchain(blockchain_instance=hive, mode="head")
 stream = blockchain.stream()
