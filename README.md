@@ -193,12 +193,12 @@ The fields are as following:
     "min_bcx": 5
     ```
     
-8. `min_cp_per_dec`: To buy only cards with a specific CP/DEC (Collection Power per DEC)
+8. `min_cp_per_usd`: To buy only cards with a specific CP/USD (Collection Power per USD)
 
-    Example, buy cards with CP/DEC >= 500:
+    Example, buy cards with CP/USD >= 200:
 
     ```
-    "min_cp_per_dec": 500
+    "min_cp_per_usd": 200
     ```
 
 9. `max_price`: The maximum price in USD to buy the cards. Everything cheaper than this price will be bought by the bot.
