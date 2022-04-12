@@ -49,9 +49,6 @@ logger.addHandler(handler)
 logger.error("starting...")
 
 
-buypct = 86
-sellpct = 25
-
 my_file = os.path.join(THIS_FOLDER, 'bids.json')
 f = open(my_file)
 configfile = json.load(f)
@@ -280,7 +277,7 @@ def check_prices():
   for bid in bids:
     for card in cardsjson:
       if str(card["card_detail_id"]) in bid["cards"] and card["gold"] == bid["gold_only"]:
-        bid["max_price"] = min(bid["max_price"], (card["low_price"] * (buypct / 100)))
+        bid["max_price"] = min(bid["max_price"], (card["low_price"] * (1 - (buypct / 100))))
     logger.error(bid["comment"] + ": " + str(bid["max_price"]))
     print(bid["comment"] + ": " + str(bid["max_price"]))
   return
