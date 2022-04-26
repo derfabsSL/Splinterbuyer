@@ -203,6 +203,7 @@ def check_desired(listing, trx_id):
     if ((float(bid["max_quantity"]) > 0) 
     and (cardid in bid["cards"]) 
     and (price <= float(bid["prices"][cardid])) 
+    and (price <= float(bid["max_price"]))
     and ((not bid["gold_only"]) or (str(listing["cards"])[2] == "G"))
     and (bid["min_bcx"] == 0 or calculate_bcx_from_cardID(str(listing["cards"])[2:-2]) >= bid["min_bcx"])
     and (bid["min_cp_per_usd"] == 0 or calc_cp_per_usd(str(listing["cards"])[2:-2], price) >= bid["min_cp_per_usd"])):
