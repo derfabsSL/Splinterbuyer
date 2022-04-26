@@ -206,7 +206,7 @@ The fields are as following:
      Example, buy everything under 69.420 USD:
      
       ```
-      "max_price": [69.42]
+      "max_price": 69.42
       ```
 10. `max_quantity`: How many cards the bot should buy for this specific bid
 
