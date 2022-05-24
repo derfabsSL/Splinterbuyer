@@ -281,8 +281,9 @@ def check_prices():
           bid["prices"][str(card["card_detail_id"])] = (card["low_price"] * (1 - (buypct / 100)))
     return
   else:
-    for cardid in bid["cards"]:
-      bid["prices"][cardid] = bid["max_price"]
+    for bid in bids:
+      for cardid in bid["cards"]:
+        bid["prices"][cardid] = bid["max_price"]
     return
   
 for bid in bids:
