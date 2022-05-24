@@ -273,3 +273,8 @@ The code for this bot is open source, so you can see for yourself where the key 
 
 If you wish to donate to me (the developer), you can do so through Splinterlands
 ```@derfabs```
+
+Use my referral links for Splinterlands and Rising Star!
+
+https://splinterlands.com?ref=derfabs
+https://www.risingstargame.com?referrer=derfabs
